@@ -1,0 +1,10 @@
+#!/bin/sh -
+
+bl_dev=/sys/class/backlight/intel_backlight
+step=$(($(< $bl_dev/max_brightness) / 100))
+
+case "$1" in
+    -|+)
+        echo $(($(< $bl_dev/brightness) $1 $step)) > $bl_dev/brightness
+        ;;
+esac
